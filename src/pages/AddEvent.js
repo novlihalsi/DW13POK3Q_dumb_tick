@@ -121,6 +121,7 @@ class AddEvent extends Component {
                   style={{ width: "100%" }}
                   onChange={this.handleChange}
                 />
+
                 <TextField
                   color="secondary"
                   name="end"

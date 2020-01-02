@@ -5,6 +5,7 @@ import { Container, Grid, Paper, Avatar, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { getFavorite } from "../_actions/favorite";
 import Footer from "../component/Footer";
+import Event from "../component/Event";
 
 class Profile extends Component {
   componentDidMount() {
@@ -36,9 +37,9 @@ class Profile extends Component {
                 >
                   {localStorage.getItem("fullname")}
                 </Typography>
-                <Button variant="outlined" size="small" color="secondary">
+                {/* <Button variant="outlined" size="small" color="secondary">
                   Edit Profile
-                </Button>
+                </Button> */}
               </div>
               <div>
                 <Typography>{localStorage.getItem("email")}</Typography>
@@ -59,6 +60,23 @@ class Profile extends Component {
               Favorite
             </Typography>
           </div>
+          <Grid container spacing={3}>
+            {favorite.map(item => (
+              <Event
+                id={item.events.id}
+                url={item.events.image}
+                judul={
+                  item.events.title.length > 30
+                    ? item.events.title.substring(0, 22) + "..."
+                    : item.events.title
+                }
+                harga={item.events.price}
+                isi={item.events.description.substring(0, 100) + "..."}
+                // user={item.user.fullname}
+                time={item.events.startTime}
+              />
+            ))}
+          </Grid>
         </Container>
         <Footer />
       </div>

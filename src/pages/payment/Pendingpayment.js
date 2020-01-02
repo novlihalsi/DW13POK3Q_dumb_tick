@@ -113,7 +113,21 @@ class Pendingpayment extends Component {
             )}
           </Grid>
           <Grid item md={2}>
-            {status === "confirmed" ? (
+            {(status === "pending" && (
+              <Button
+                variant="outlined"
+                color="secondary"
+                size="small"
+                onClick={this.handleConfirm}
+              >
+                Confirm
+              </Button>
+            )) ||
+              (status === "confirmed" && (
+                <Typography>Waiting Approved</Typography>
+              )) ||
+              (status === "approved" && <Typography>Approved</Typography>)}
+            {/* {status === "confirmed" ? (
               <Typography>Waiting Approved</Typography>
             ) : (
               <Button
@@ -124,7 +138,7 @@ class Pendingpayment extends Component {
               >
                 Confirm
               </Button>
-            )}
+            )} */}
           </Grid>
         </Grid>
       </Grid>

@@ -7,7 +7,8 @@ import {
   GET_ORDERAPPROVED_FULFILLED,
   PUT_ORDER_FULFILLED,
   PUT_ORDER_PENDING,
-  PUT_ORDER_REJECTED
+  PUT_ORDER_REJECTED,
+  GET_ORDER_FULFILLED
 } from "../config/constant";
 
 const initialState = {
@@ -16,12 +17,18 @@ const initialState = {
   orderconf: [],
   dataorder: [],
   putdataorder: [],
+  order: [],
   error: false,
   isloading: false
 };
 
 export const order = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ORDER_FULFILLED:
+      return {
+        ...state,
+        order: action.payload
+      };
     case GET_ORDERPEND_FULFILLED:
       return {
         ...state,

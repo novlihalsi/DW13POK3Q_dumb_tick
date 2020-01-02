@@ -52,6 +52,7 @@ const getDetailEvent = id => Get(`events/${id}/detailevent`);
 const postEvent = (data, token) => Post(`events`, data, token);
 
 //order
+const getOrder = id => Get(`order/${id}/orderbyperson`);
 const getOrderPending = id => Get(`order/${id}/orderbyperson/pending`);
 const getOrderConfirmed = id => Get(`order/${id}/orderbyperson/confirmed`);
 const getOrderApproved = id => Get(`order/${id}/orderbyperson/approved`);
@@ -72,7 +73,8 @@ const API = {
   getCategoryEvent,
   postOrder,
   putOrder,
-  getFavorite
+  getFavorite,
+  getOrder
 };
 
 export default API;

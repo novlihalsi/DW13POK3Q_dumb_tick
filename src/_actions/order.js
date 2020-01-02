@@ -3,9 +3,17 @@ import {
   GET_ORDERCONFIRM,
   POST_ORDER,
   GET_ORDERAPPROVED,
-  PUT_ORDER
+  PUT_ORDER,
+  GET_ORDER
 } from "../config/constant";
 import API from "../config/Api";
+
+export const getOrder = id => {
+  return {
+    type: GET_ORDER,
+    payload: API.getOrder(id)
+  };
+};
 
 export const getOrderPend = id => {
   return {
