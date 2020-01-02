@@ -11,6 +11,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import NumberFormat from "react-number-format";
+import axios from "axios";
 
 class Event extends Component {
   constructor() {
@@ -20,12 +21,59 @@ class Event extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .post(`http://localhost:5000/api/v1/favorite/show`, {
+        user_id: localStorage.getItem("id"),
+        event_id: this.props.id
+      })
+      .then(res => {
+        this.setState({ fave: res.data.fav });
+        // console.log(res.data);
+      });
+  }
   handleFave = () => {
-    this.setState({
-      fave: true
-    });
+    if (this.state.fave) {
+      axios
+        .post(
+          `http://localhost:5000/api/v1/favorite/delete`,
+
+          {
+            user_id: localStorage.getItem("id"),
+            event_id: this.props.id
+          },
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(res => {
+          this.setState({ fave: res.data.fav });
+        });
+    } else {
+      axios
+        .post(
+          `http://localhost:5000/api/v1/favorite`,
+          {
+            user_id: localStorage.getItem("id"),
+            event_id: this.props.id
+          },
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        )
+        .then(res => {
+          this.setState({ fave: res.data.fav });
+        });
+    }
+
+    // window.location.reload();
   };
   render() {
+    console.log(this.state.fave);
     return (
       // <CardActionArea>
       // <div style={{ flex: 1, marginRight: "30px" }}>

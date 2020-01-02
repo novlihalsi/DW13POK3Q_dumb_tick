@@ -2,13 +2,18 @@ import React, { Component } from "react";
 import Header from "../component/header/Header";
 import Typography from "@material-ui/core/Typography";
 import { Container, Grid, Paper, Avatar, Button } from "@material-ui/core";
-import axios from "axios";
-import NumberFormat from "react-number-format";
-
+import { connect } from "react-redux";
+import { getFavorite } from "../_actions/favorite";
 import Footer from "../component/Footer";
 
 class Profile extends Component {
+  componentDidMount() {
+    const id = localStorage.getItem("id");
+    this.props.dispatch(getFavorite(id));
+  }
   render() {
+    const { favorite } = this.props.favorite;
+
     return (
       <div>
         <Header />
@@ -61,4 +66,10 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+  return {
+    favorite: state.favorite
+  };
+};
+
+export default connect(mapStateToProps)(Profile);

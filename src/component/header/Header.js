@@ -110,7 +110,20 @@ function ButtonAppBar() {
             </IconButton> */}
             {/* <ModalLogin/> */}
             {localStorage.getItem("token") ? (
-              <ProfilButton />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center"
+                }}
+              >
+                <div style={{ marginRight: 20 }}>
+                  <Typography>{localStorage.getItem("username")}</Typography>
+                </div>
+                <div>
+                  <ProfilButton />
+                </div>
+              </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <div style={{ marginRight: 20 }}>

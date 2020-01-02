@@ -248,7 +248,7 @@ function Login() {
           window.location.reload();
         })
         .catch(err => {
-          alert(err);
+          alert("email atau kata sandi salah");
         });
     }
     // console.log(error);

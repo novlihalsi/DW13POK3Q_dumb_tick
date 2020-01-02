@@ -58,6 +58,9 @@ const getOrderApproved = id => Get(`order/${id}/orderbyperson/approved`);
 const postOrder = (data, token) => Post(`order`, data, token);
 const putOrder = (id, data, token) => Put(`order/${id}`, data, token);
 
+//favorite
+const getFavorite = id => Get(`favorite/${id}`);
+
 const API = {
   getCategory,
   getEvent,
@@ -68,7 +71,8 @@ const API = {
   getOrderApproved,
   getCategoryEvent,
   postOrder,
-  putOrder
+  putOrder,
+  getFavorite
 };
 
 export default API;
