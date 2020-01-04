@@ -44,7 +44,7 @@ class Footer extends Component {
                     Halsi Ticket
                   </Typography>
                   <Typography variant="subtitle1" style={{ color: "white" }}>
-                    Halsi Ticketis a web-based platform that provides tickte
+                    Halsi Ticket is a web-based platform that provides ticktet
                     form various event around sport, music, science, and
                     programming.
                   </Typography>

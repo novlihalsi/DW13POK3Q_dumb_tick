@@ -16,14 +16,13 @@ class Payment extends Component {
     this.props.dispatch(getOrder(id));
   }
   render() {
-    const { orderpend, orderconf, order } = this.props.ticket;
+    const { order } = this.props.ticket;
     const { putdataorder } = this.props.putorder;
     if (putdataorder.message) {
       alert("success");
       window.location.reload();
     }
 
-    // console.log(orderpend);
     return (
       <div>
         <Header />
@@ -33,10 +32,9 @@ class Payment extends Component {
               variant="h4"
               style={{ color: "#EF233C", fontWeight: "bold" }}
             >
-              Pending Payment
+              Payment
             </Typography>
           </div>
-          {/* <Paper elevation={3}> */}
 
           {order.map(item => (
             <Paper style={{ marginBottom: 30 }}>
@@ -57,38 +55,6 @@ class Payment extends Component {
               </Grid>
             </Paper>
           ))}
-
-          <div style={{ marginBottom: 30, marginTop: 40 }}>
-            <Typography
-              variant="h4"
-              style={{ color: "#EF233C", fontWeight: "bold" }}
-            >
-              Confirm Payment
-            </Typography>
-          </div>
-
-          {/* {orderconf &&
-            orderconf.map(item => (
-              <Paper style={{ marginBottom: 30 }}>
-                <Grid container justify="center">
-                  <Pendingpayment
-                    url={item.events.image}
-                    judul={item.events.title}
-                    user={item.user.fullname}
-                    userid={item.user.id}
-                    harga={item.events.price}
-                    total={item.totalPrice}
-                    quantity={item.quantity}
-                    address={item.events.address}
-                    time={item.events.startTime}
-                    id={item.id}
-                    status={item.status}
-                  />
-                </Grid>
-              </Paper>
-            ))} */}
-
-          {/* </Paper> */}
         </Container>
         <Footer />
       </div>

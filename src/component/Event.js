@@ -50,6 +50,7 @@ class Event extends Component {
         )
         .then(res => {
           this.setState({ fave: res.data.fav });
+          window.location.reload();
         });
     } else {
       axios
@@ -67,6 +68,7 @@ class Event extends Component {
         )
         .then(res => {
           this.setState({ fave: res.data.fav });
+          window.location.reload();
         });
     }
 
@@ -126,7 +128,11 @@ class Event extends Component {
               onClick={this.handleFave}
               style={{ marginLeft: "auto" }}
             >
-              {this.state.fave ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              {this.state.fave ? (
+                <FavoriteIcon color="secondary" />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
             </IconButton>
           </CardActions>
           <CardContent>

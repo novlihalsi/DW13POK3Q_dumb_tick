@@ -10,11 +10,25 @@ import { Grid, Container, Button, LinearProgress } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      search: ""
+    };
+  }
   componentDidMount() {
     this.props.dispatch(getEvent());
   }
+
+  onChange = event => {
+    this.setState({ search: event.target.value });
+  };
   render() {
     const { events, geteventpending, geteventreject } = this.props.event;
+    const { search } = this.state;
+    const filteredEvents = events.filter(events => {
+      return events.title.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
     const todayEvents = events.filter(events => {
       const date = new Date(events.startTime);
       return (
@@ -31,6 +45,7 @@ class Home extends Component {
         tomorrow.toISOString().substring(0, 10)
       );
     });
+
     if (geteventpending) {
       return (
         <div>
@@ -86,6 +101,7 @@ class Home extends Component {
                   id="standard-basic"
                   label="Search Events"
                   style={{ width: "100%", marginTop: 30 }}
+                  onChange={this.onChange}
                 />
               </Grid>
             </Grid>
@@ -100,57 +116,88 @@ class Home extends Component {
             <div>
               <Category />
             </div>
-
-            <div style={{ margin: "30px 0" }}>
-              <Typography
-                variant="h4"
-                style={{ color: "#EF233C", fontWeight: "bold" }}
-              >
-                Today
-              </Typography>
-            </div>
-            <Grid container spacing={3}>
-              {events.map(item => (
-                <Event
-                  id={item.id}
-                  url={item.image}
-                  judul={
-                    item.title.length > 30
-                      ? item.title.substring(0, 22) + "..."
-                      : item.title
-                  }
-                  harga={item.price}
-                  isi={item.description.substring(0, 100) + "..."}
-                  user={item.user.fullname}
-                  time={item.startTime}
-                />
-              ))}
-            </Grid>
-            <div style={{ margin: "30px 0" }}>
-              <Typography
-                variant="h4"
-                style={{ color: "#EF233C", fontWeight: "bold" }}
-              >
-                Up Coming Event
-              </Typography>
-            </div>
-            <Grid container spacing={3}>
-              {events.map(item => (
-                <Event
-                  id={item.id}
-                  url={item.image}
-                  judul={
-                    item.title.length > 30
-                      ? item.title.substring(0, 30) + "..."
-                      : item.title
-                  }
-                  harga={item.price}
-                  isi={item.description.substring(0, 100) + "..."}
-                  user={item.user.fullname}
-                  time={item.startTime}
-                />
-              ))}
-            </Grid>
+            {search ? (
+              <div>
+                <div style={{ margin: "30px 0" }}>
+                  <Typography
+                    variant="h4"
+                    style={{ color: "#EF233C", fontWeight: "bold" }}
+                  >
+                    Search
+                  </Typography>
+                </div>
+                <Grid container spacing={3}>
+                  {filteredEvents.map(item => (
+                    <Event
+                      id={item.id}
+                      url={item.image}
+                      judul={
+                        item.title.length > 30
+                          ? item.title.substring(0, 22) + "..."
+                          : item.title
+                      }
+                      harga={item.price}
+                      isi={item.description.substring(0, 100) + "..."}
+                      user={item.user.fullname}
+                      time={item.startTime}
+                    />
+                  ))}
+                </Grid>
+              </div>
+            ) : (
+              <div>
+                <div style={{ margin: "30px 0" }}>
+                  <Typography
+                    variant="h4"
+                    style={{ color: "#EF233C", fontWeight: "bold" }}
+                  >
+                    Today
+                  </Typography>
+                </div>
+                <Grid container spacing={3}>
+                  {events.map(item => (
+                    <Event
+                      id={item.id}
+                      url={item.image}
+                      judul={
+                        item.title.length > 30
+                          ? item.title.substring(0, 22) + "..."
+                          : item.title
+                      }
+                      harga={item.price}
+                      isi={item.description.substring(0, 100) + "..."}
+                      user={item.user.fullname}
+                      time={item.startTime}
+                    />
+                  ))}
+                </Grid>
+                <div style={{ margin: "30px 0" }}>
+                  <Typography
+                    variant="h4"
+                    style={{ color: "#EF233C", fontWeight: "bold" }}
+                  >
+                    Up Coming Event
+                  </Typography>
+                </div>
+                <Grid container spacing={3}>
+                  {events.map(item => (
+                    <Event
+                      id={item.id}
+                      url={item.image}
+                      judul={
+                        item.title.length > 30
+                          ? item.title.substring(0, 30) + "..."
+                          : item.title
+                      }
+                      harga={item.price}
+                      isi={item.description.substring(0, 100) + "..."}
+                      user={item.user.fullname}
+                      time={item.startTime}
+                    />
+                  ))}
+                </Grid>
+              </div>
+            )}
           </Container>
           <Footer />
         </div>

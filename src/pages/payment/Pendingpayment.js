@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import { Grid, Button, TextField } from "@material-ui/core";
-import axios from "axios";
-import { connect } from "react-redux";
 import { putOrder } from "../../_actions/order";
 
 class Pendingpayment extends Component {
   handleConfirm = () => {
     const id = this.props.id;
-    // axios
-    //   .put(`http://localhost:5000/api/v1/order/${id}`, {
-    //     status: "confirmed"
-    //   })
-    //   .then(res => {
-    //     alert(res.data.message);
-    //   });
 
     this.props.dispatch(
       putOrder(
@@ -124,21 +115,15 @@ class Pendingpayment extends Component {
               </Button>
             )) ||
               (status === "confirmed" && (
-                <Typography>Waiting Approved</Typography>
+                <Typography style={{ color: "orange", fontWeight: "bold" }}>
+                  Waiting for Approved
+                </Typography>
               )) ||
-              (status === "approved" && <Typography>Approved</Typography>)}
-            {/* {status === "confirmed" ? (
-              <Typography>Waiting Approved</Typography>
-            ) : (
-              <Button
-                variant="outlined"
-                color="secondary"
-                size="small"
-                onClick={this.handleConfirm}
-              >
-                Confirm
-              </Button>
-            )} */}
+              (status === "approved" && (
+                <Typography style={{ color: "green", fontWeight: "bold" }}>
+                  Approved
+                </Typography>
+              ))}
           </Grid>
         </Grid>
       </Grid>
@@ -146,50 +131,4 @@ class Pendingpayment extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
-export default connect(mapStateToProps)(Pendingpayment);
-
-{
-  /* <Card style={{ height: "420px" }}>
-          <CardMedia
-            style={{ height: "180px" }}
-            image={this.props.url}
-            title="Live from space album cover"
-          />
-          <div>
-            <CardContent>
-              <Typography
-                component="h5"
-                variant="h5"
-                paragraph="1"
-                style={{ fontWeight: "bold", color: "black" }}
-              >
-                {this.props.judul}
-              </Typography>
-              <Typography variant="subtitle1" color="black">
-                {this.props.user}
-              </Typography>
-
-              <Typography variant="h6" color="textSecondary">
-                {this.props.harga}
-              </Typography>
-
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                paragraph="1px"
-              >
-                {this.props.address}
-              </Typography>
-
-              <Typography variant="subtitle1" color="textSecondary">
-                {this.props.time}
-              </Typography>
-              <Button onClick={this.handleConfirm}>Confirm</Button>
-            </CardContent>
-          </div>
-        </Card> */
-}
+export default Pendingpayment;

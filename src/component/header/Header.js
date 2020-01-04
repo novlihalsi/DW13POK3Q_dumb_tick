@@ -118,7 +118,11 @@ function ButtonAppBar() {
                 }}
               >
                 <div style={{ marginRight: 20 }}>
-                  <Typography>{localStorage.getItem("username")}</Typography>
+                  <Typography
+                    style={{ textTransform: "capitalize", fontWeight: "bold" }}
+                  >
+                    {localStorage.getItem("username")}
+                  </Typography>
                 </div>
                 <div>
                   <ProfilButton />

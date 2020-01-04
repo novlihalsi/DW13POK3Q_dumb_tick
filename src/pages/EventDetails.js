@@ -77,30 +77,12 @@ class EventDetails extends Component {
     this.props.dispatch(getDetailEvent(id));
   }
   render() {
-    // const handleBuy = () => {
-    //   const event = this.props.detailevent.detail;
-    //   const { jumlah } = this.state;
-    //   const eventid = event.id;
-    //   const userid = localStorage.getItem("id");
-    //   const totalharga = jumlah * event.price;
-    //   // const token = localStorage.getItem("token");
-
-    //   this.props.dispatch(
-    //     postOrder({
-    //       event_id: eventid,
-    //       user_id: userid,
-    //       quantity: jumlah,
-    //       totalPrice: totalharga,
-    //       status: "pending"
-    //     })
-    //   );
-    // };
-
     const { detail } = this.props.detailevent;
     const harga = this.state.jumlah * detail.price;
     const start = moment(detail.startTime).format("DD MMM YYYY");
     const end = moment(detail.endTime).format("DD MMM YYYY");
     const { isloading, error, dataorder } = this.props.dataorder;
+    const user_id = localStorage.getItem("id");
 
     if (error) {
       alert("gagal");
@@ -177,51 +159,71 @@ class EventDetails extends Component {
                 </Grid>
                 <Grid item xs={6} md={4} justify="flex-end">
                   {localStorage.getItem("token") ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "flex-end"
-                      }}
-                    >
-                      <Button onClick={this.decrement} size="small">
-                        -
-                      </Button>
-                      <Typography
-                        variant="subtitle1"
+                    detail.user_id != user_id ? (
+                      <div
                         style={{
-                          fontSize: 25,
-                          color: "#EF233C",
-                          fontWeight: "bold"
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-end"
                         }}
                       >
-                        {this.state.jumlah}
-                      </Typography>
-                      <Button onClick={this.increment} size="small">
-                        +
-                      </Button>
-                      {isloading ? (
-                        <CircularProgress
+                        <Button onClick={this.decrement} size="small">
+                          -
+                        </Button>
+                        <Typography
+                          variant="subtitle1"
                           style={{
-                            marginRight: 30
-                          }}
-                        />
-                      ) : (
-                        <Button
-                          variant="contained"
-                          size="medium"
-                          onClick={this.handleBuy}
-                          style={{
-                            backgroundColor: "#EF233C",
-                            marginRight: 30,
-                            color: "white"
+                            fontSize: 25,
+                            color: "#EF233C",
+                            fontWeight: "bold"
                           }}
                         >
-                          Buy
+                          {this.state.jumlah}
+                        </Typography>
+                        <Button onClick={this.increment} size="small">
+                          +
                         </Button>
-                      )}
-                    </div>
+                        {isloading ? (
+                          <CircularProgress
+                            style={{
+                              marginRight: 30
+                            }}
+                          />
+                        ) : (
+                          <Button
+                            variant="contained"
+                            size="medium"
+                            onClick={this.handleBuy}
+                            style={{
+                              backgroundColor: "#EF233C",
+                              marginRight: 30,
+                              color: "white"
+                            }}
+                          >
+                            Buy
+                          </Button>
+                        )}
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "flex-end"
+                        }}
+                      >
+                        <Typography
+                          style={{
+                            marginRight: 30,
+                            color: "#EF233C"
+                          }}
+                        >
+                          Your Ticket
+                        </Typography>
+                      </div>
+                    )
                   ) : (
                     <div
                       style={{

@@ -117,16 +117,20 @@ class AddEvent extends Component {
                 <TextField
                   color="secondary"
                   name="start"
-                  label="startTime DD/MM/YYYY"
-                  style={{ width: "100%" }}
+                  type="datetime-local"
+                  defaultValue="2019-01-01T00:00"
+                  label="Start Date"
+                  style={{ width: "100%", marginTop: 10 }}
                   onChange={this.handleChange}
                 />
 
                 <TextField
                   color="secondary"
                   name="end"
-                  label="endTime DD/MM/YYYY"
-                  style={{ width: "100%" }}
+                  type="datetime-local"
+                  defaultValue="2019-01-01T00:00"
+                  label="End Date"
+                  style={{ width: "100%", marginTop: 10 }}
                   onChange={this.handleChange}
                 />
                 <TextField
